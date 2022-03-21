@@ -1,0 +1,536 @@
+@font-face {
+  font-family: 'rowide';
+  src: url('../src/fonts/HeadingProWide-ExtraBold.ttf');
+}
+
+@font-face {
+	font-family: 'Gilroy_Bold';
+	src: url('../src/fonts/Gilroy-Bold.woff');
+}
+ 
+
+
+
+:root {
+    --btn_featured_color:linear-gradient(94.24deg, #7614C4 0%, #4D139A 100%);
+    --main_color:#551BA2;
+    --secont_color:#FFD703;
+}
+
+
+
+*{
+	margin:0;
+	padding:0;
+	font-family: 'Gilroy_Bold';
+}
+
+body>div{
+    height:0;
+}
+
+
+body{
+    display:grid;
+    grid-template:auto 1fr/1fr;
+    //background-image:url(shrek_bg.jpg);
+    background-image:url(https://media4.giphy.com/media/229ZAKD0M1Uc9UwjGE/giphy.gif?cid=ecf05e47ql9xls0m7libo7tqgbk81m6nghhpu21vr9b4r5ok&rid=giphy.gif);
+    background-attachment: fixed;
+    background-color:black;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center ;
+	
+    min-height:100vh;
+	color:white;
+}
+
+
+
+
+
+header{
+    justify-self: stretch;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    align-content:center;
+    width:calc(100vw - 8vw);
+    padding:1vw 3vw;
+    margin:auto;
+}
+
+
+
+
+.left_header{
+    position:relative;
+    display:flex;
+    gap:1vw;
+}
+
+h1{
+    font-size:3.5vw;
+    font-family:rowide;
+}
+
+.restart_counter_wrapper{
+    display:flex;
+    align-items:center;
+}
+
+.restart_counter{
+    background-color:white;
+    border-radius:1vw;
+    font-size:3vw;
+    padding: .2vw 2vw;
+    color: var(--main_color);
+    font-family:rowide;
+    
+}
+
+
+
+
+
+
+
+.right_header{
+    display:flex;
+    gap:2vw;
+}
+
+.team_btn{
+    height: 5vw;
+    width:  5vw;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border: .3vw solid var(--main_color);
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 1vw;
+    cursor:pointer;
+    user-select:none;
+}
+
+.team_btn div{
+    font-size:3.5vw;
+}
+.drop{
+    height: 5vw;
+    width:  5vw;
+    position: relative;
+    z-index: 1;
+    border: .3vw solid  var(--main_color);
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 1vw;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.drop:before
+{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top:  0%;
+    left: 0%;
+    z-index: -1;
+    background: url(../src/Vector.png) 50% 40% no-repeat;
+    background-size:50%;
+    transform: rotate(0deg);
+    transition:.2s
+}
+
+.drop:active:before{
+    transition:0s;
+    transform: rotate(360deg);
+}
+
+.drop:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.drop:active{
+    transition:0s;
+    transform:rotate(0deg);
+}
+
+
+
+.randome_btn{
+    display:flex;
+    align-items: center;
+    padding: 1vw 3vw;
+    gap:.5em;
+    background: var(--btn_featured_color);
+    font-size: 2.2vw;
+    border-radius: 1vw;
+    cursor:pointer;
+    user-select:none;
+    transition:.2s;
+}
+
+.randome_btn:hover{
+    background: linear-gradient(94.24deg, #8417DE 0%, #5E17BB 100%);
+}
+
+.randome_btn:active{
+    background: linear-gradient(94.24deg, #6C12B5 0%, #3C0E77 100%);
+}
+
+.randome_counter{
+    color: var(--secont_color);
+
+}
+
+
+
+
+
+section{
+    align-self: center;
+}
+
+
+.swiper-container{
+    width:100vw !important;
+    overflow:hidden;
+}
+
+.user_grid{
+	display: grid;
+	gap:1vw;
+	grid-template:1fr 1fr 1fr 1fr/1fr 1fr 1fr;
+	
+	width:calc(100% - 100px);
+	max-width:100vw;
+	margin:auto;
+	justify-self: start;
+}
+
+@media (max-width: 768px){
+    .user_grid{
+        grid-template:1fr/1fr;
+    }
+}
+
+header{
+  align-self: start;
+}
+
+.user_block{
+    position:relative;
+    background: rgba(255, 255, 255, 0.1);
+	display: flex;
+	align-self: center;
+	color:white;
+    border-radius: 2vmin;
+	overflow:hidden;
+}
+
+.present_user{
+    width: 6vw;
+    height:6vw;
+    background-color: var(--secont_color);
+    position:absolute;
+    transform:rotate(45deg);
+    right:-3vw;
+    top:-3vw;
+}
+
+.info_block{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 1vw 1vw;
+}
+
+.user_name, .user_surname{
+	font-size:3vw;
+}
+
+.user_points{
+	font-size:2vw;
+    position: absolute;
+    padding:.2vw .4vw;
+    border-radius: .5vw;
+    left:.5vw;
+    top: .5vw;
+    background-color: #fff;
+    color: var(--main_color);
+;
+}
+
+img{
+	display: block;
+	height:8vw;
+	width: 8vw;
+	background-color: #333;
+	object-fit: cover;
+}
+
+
+.new_player_form{
+    display:flex;
+    justify-content:center;
+    height:auto;
+    align-items: flex-start;
+}
+
+input{
+    border:none;
+    padding:1.5px;
+}
+.new_player_btn{
+    display:inline-block;
+    color:white;
+    background:gray;
+    padding:0 10px;
+    cursor:pointer;
+}
+
+.new_player_btn:hover{
+    background:orange;
+}
+
+.new_player_btn:active{
+    background:green;
+}
+
+.imaginar_person{
+    position:absolute;
+	border:3px solid rgba(152,83,255, .5);
+	top:50%;
+	left:50%;
+	transform: translate(-50%, -50%);
+	z-index:2;
+	padding:1vw;
+	display:flex;
+	color:white;
+	background:black;
+	gap:1vw;
+}
+
+.imag_img{
+    height:13vw;
+    width: 13vw;
+    background-color:red;
+    background-size:contain;
+    border-image:none;
+}
+
+.imag_user_name{
+    font-size:3vw;
+}
+
+.imag_uesr_points{
+    font-size:2.5vw;
+}    
+
+.imag_info_block{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-around;
+}
+
+.imaginar_block_for_delete{
+    position:absolute;
+    background-color:rgba(0,0,0,.4);
+    z-index:1;
+    height:100%;
+    width:100%;
+    top:0;
+    left:0;
+    
+}
+
+.hidded{
+    z-index:-2 !important;
+    opacity:0;
+    display:none;
+}
+
+.loading{
+    position:absolute;
+    height:100%;
+    width: 100%;
+    top: 0;
+    left:0;
+    background-image: url(https://i.gifer.com/ZZ5H.gif);
+    background-color:black;
+    background-position: center;
+    background-size: 30%;
+    background-repeat: no-repeat;
+    z-index:4;
+}
+
+.loading_hiden{
+    opacity:0;
+    z-index:-2;
+}
+
+.imaginar_start{
+    position:absolute;
+    top:50%;
+    right:50%;
+    transform: translate(50%, -50%);
+    font-size:14vw;
+    padding: 0 4vw;
+    border-radius:2vmin;
+    background-color:green;
+    z-index:10;
+    cursor:pointer;
+    user-select:none;
+}
+
+
+.user_randome_selector_wrapper{
+    z-index:2;
+    position:absolute;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    width:100vw;
+    background:rgba(0,0,0,.5);
+}
+
+.user_randome_selector_delete{
+    position:absolute;
+    height:100vh;
+    width:100vw;
+}
+
+.user_randome_selector_box{
+    z-index:1;
+    display:grid;
+    grid-template:1fr 1fr/1fr 1fr 1fr;
+	border:3px solid rgba(152,83,255, .5);
+    gap:2vw 3vw;
+	border-radius:1vw;
+    background:black;
+	padding:5vw;
+}
+
+.user_randome_selector_box div{
+    background:#000000;
+    font-size:5vw;
+    padding:1vw 2vw;
+    
+	border:3px solid rgba(152,83,255, .5);;
+	border-radius:1vw;
+	
+	user-select:none;
+	cursor:pointer;
+}
+
+.user_randome_selector_box div:hover{
+    background:#222222;
+}
+    
+.user_randome_finish_selector_wrapper{
+    z-index:2;
+    position:absolute;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    height:100vh;
+    width:100vw;
+    background:rgba(0,0,0,.5);
+}
+    
+.user_randome_finish_selector_delete{
+    position:absolute;
+    height:100vh;
+    width:100vw;
+}
+
+#test{
+    //margin-left:6vw;
+}
+
+#test::before{
+    /*
+    content:'';
+    position:absolute;
+    top:-.4vw;
+    left:0;
+    line-height:2vw;
+    background-color:transparent;
+    background-image:url('shrek.png');
+    background-position:center;
+    background-size:contain;
+    background-repeat:no-repeat;
+    height:5vw;
+    width: 5vw;
+    display:inline-block;
+    */
+}
+
+
+
+
+#user_randome_finish_selector_block{
+    z-index:2;
+    background-color:black;
+	border:3px solid rgba(152,83,255, .5);;
+	border-radius:1vw;
+	
+	
+    width:80vw;
+    display:flex;
+    justify-content:space-between;
+}
+
+#user_randome_finish_selector_block div{
+	display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:Center;
+}
+
+
+#user_randome_finish_selector_block>div:nth-child(odd){
+    background-color:#F00;
+}
+
+
+#user_randome_finish_selector_block>div:nth-child(even){
+    background-color:#00F;
+}
+
+#user_randome_finish_selector_block div div{
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:Center;
+    align-items:center;
+    border-radius: 1vw;
+    padding:0.2vw;
+}
+
+#user_randome_finish_selector_block div div img{
+    width:  6vw;
+    height: 6vw;
+}
+
+
+#user_randome_finish_selector_block div div div{
+    font-size:2vw;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,100 @@
+@font-face {
+	font-family: 'Gilroy-Regular';
+	src: url('../src/fonts/Gilroy-Regular.ttf');
+}
+
+@font-face {
+	font-family: 'Gilroy-Light';
+	src: url('../src/fonts/Gilroy-Light.ttf');
+}
+
+
+*{
+	margin:0;
+	padding:0;
+	font-family: 'Gilroy-Regular';
+	box-sizing:border-box;
+}
+
+body>div{
+    height:0;
+}
+
+body{
+	min-height: 100vh;
+	background-image:url(https://media4.giphy.com/media/229ZAKD0M1Uc9UwjGE/giphy.gif?cid=ecf05e47ql9xls0m7libo7tqgbk81m6nghhpu21vr9b4r5ok&rid=giphy.gif);
+    background-attachment: fixed;
+    background-color:black;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center ;
+	padding:20px 20px 200px 20px;
+	color:white;
+}
+
+section{
+    padding-top:120px;
+}
+
+header{
+    top:0;
+    left:0;
+    padding:20px;
+    width:100%;
+}
+input{
+    padding:.1em;
+    margin:auto;
+    font-size:40px;
+    width:100%;
+    border:.1em solid rgba(100,100,100);
+    color:white;
+    background-color:black;
+    transition:.1s;
+    position:relative;
+}
+
+input:focus{
+    border:.1em solid rgba(152,83,255, .5);
+    outline:none;
+    
+}
+
+
+.add_point{
+    border:3px solid rgba(152,83,255, .5);
+	background-color: rgba(255,255,255,.1);
+    
+    margin:20px 0;
+    padding:10px;
+    color:rgb(152,83,255);
+    font-size:40px;
+    transition:.2s;
+}
+
+.add_point:active{
+	background-color: rgba(255,255,255,.4);
+}
+
+@media (max-width: 600px) {
+    body{
+        padding:3vw 3vw 30vw 3vw;
+    }
+    header{
+        padding:3vw;;
+    }
+    
+    .user_block {
+        grid-template: 1fr/15vw 1fr 15vw;
+    }
+    img{
+        height:15vw;
+        width: 15vw;
+    }
+    .user_name{
+        font-size:5vw;
+    }
+}
+
+
+

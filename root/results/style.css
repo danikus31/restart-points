@@ -1,0 +1,55 @@
+:root {
+  --adition_color: #550DA4;
+}
+
+@font-face {
+	font-family: 'Gilroy-Regular';
+	src: url('../src/fonts/Gilroy-Regular.ttf');
+}
+
+@font-face {
+	font-family: 'Gilroy-Light';
+	src: url('../src/fonts/Gilroy-Light.ttf');
+}
+
+
+*{
+	margin:0;
+	padding:0;
+	font-family: 'Gilroy-Regular';
+	box-sizing:border-box;
+}
+
+body>div{
+    height:0;
+}
+
+body{
+	min-height: 100vh;
+	background-image:url(https://media4.giphy.com/media/229ZAKD0M1Uc9UwjGE/giphy.gif?cid=ecf05e47ql9xls0m7libo7tqgbk81m6nghhpu21vr9b4r5ok&rid=giphy.gif);
+    background-attachment: fixed;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center ;
+	padding:20px 20px 100px 20px;
+	color:white;
+}
+
+
+.wrapper{
+    display:grid;
+    grid-template:1fr/repeat(15, auto);
+}
+
+.wrapper div{
+    background-color:rgba(255, 255, 255, .2);
+    margin:1px;
+}
+
+.green{
+    color:green;
+}
+
+.red{
+    color:red;
+}
