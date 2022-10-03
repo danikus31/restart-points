@@ -60,14 +60,16 @@ class data_displaying extends parent_class{
             $this->init_users_data = $y;
         }
         //sorting
+
+        /*
         if($args['sort']==true){
             array_multisort(
-                array_column($this->init_users_data, 'points'),SORT_DESC,
-                array_column($this->init_users_data, 'name'),
+                array_column($this->init_users_data, "points"),SORT_DESC,
+                array_column($this->init_users_data, "name"),
                 $this->init_users_data
             );
         }
-        
+        */
         if($this->init_users_data[$this->array_position][0] == 'easter_egg'){$this->array_position++;}
         
         $this->is_data = true;

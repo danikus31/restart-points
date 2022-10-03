@@ -1,25 +1,17 @@
 <?php
 
-$site_url = $_SERVER['SERVER_NAME'];
+$site_url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
 
 
-$root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
 
 
-if($site_url == 'restart-points.com'){
-	$url_to_site = "https://restart-points.com/root/";
-	$url_to_sub_base = $_SERVER['DOCUMENT_ROOT']."/database/";
-	$url_to_sub_base_for_photo = "https://restart-points.com/database/";
-}else{
-	$url_to_site = "http://p-restart.com/root/";
-	$url_to_sub_base = "C:/OpenServer/domains/p-restart.com/database/";
-	$url_to_sub_base_for_photo = "http://p-restart.com/database/";	
-}
+$url_to_site = $site_url."/root/";
+$url_to_sub_base = $_SERVER['DOCUMENT_ROOT']."/database/";
+$url_to_sub_base_for_photo = $site_url."/database/";	
+
 
 $url_to_base = $url_to_sub_base."tables/";
-
 $url_to_photo = $url_to_sub_base_for_photo."photos/";
-
 
 
 $data = json_decode(file_get_contents($url_to_base."users.json"), true);
