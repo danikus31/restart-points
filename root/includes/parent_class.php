@@ -47,7 +47,7 @@ class parent_class {
         }
 
 
-		for ($v = 0, $i = 0;$this->init_randome[$v]; $j += $i, $v++){
+        for ($v = 0, $i = 0, $j = 0; isset($this->init_randome[$v]); $j += $i, $v++) {
 		    if ($this->init_randome[$v][1] == 0) {
 		        $this->today_randome_list[$i] = $this->init_randome[$v][0];
 		        $i++;

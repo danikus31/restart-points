@@ -49,13 +49,23 @@ class data_displaying extends parent_class{
         //filtre by last visit
         if(isset($args['last_visits_of_users'])){
             $x=0;
-            for($i=0,$y=null;$this->init_users_data[$i];$i++){
+            
+            for ($i = 0, $y = null; isset($this->init_users_data[$i]); $i++) {
+            
 
                 //фультры на остуствее
-                if(!((floor((time() - strtotime($this->init_users_data[$i]['date']))/(60*60*24*7)))>$args['last_visits_of_users'])){
-                    $y[$x]=$this->init_users_data[$i];
-                    $x++;
+                if (isset($this->init_users_data[$i]['date']) && !empty($this->init_users_data[$i]['date'])) {
+                    $date = $this->init_users_data[$i]['date'];
+                    $time_diff = time() - strtotime($date);
+                    if (floor($time_diff / (60 * 60 * 24 * 7)) <= $args['last_visits_of_users']) {
+                        $y[$x] = $this->init_users_data[$i];
+                        $x++;
+                    }
+                } else {
+                    // Обработка случая, когда 'date' отсутствует или пустое
+                    // Например, пропустить или задать значение по умолчанию
                 }
+                
             }
             $this->init_users_data = $y;
         }
@@ -70,8 +80,10 @@ class data_displaying extends parent_class{
             );
         }
         */
-        if($this->init_users_data[$this->array_position][0] == 'easter_egg'){$this->array_position++;}
-        
+        if (isset($this->init_users_data[$this->array_position][0]) && $this->init_users_data[$this->array_position][0] == 'easter_egg') {
+            $this->array_position++;
+        }
+
         $this->is_data = true;
         
 

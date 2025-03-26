@@ -3,7 +3,7 @@
 require '../../includes/connection.php';
 
 
-$users = new data_displaying($args);
+$users = new data_displaying('nothing');
 $answer['count'] = $users->today_visits_count ;
 
 

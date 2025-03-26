@@ -13,6 +13,8 @@ class user_data_manipulation extends parent_class{
     //birthday info
     public $is_set_birthday;
     public $user_age;
+
+    public $is_user_present;
     public $user_date; 
     public $user_birth_d;
     public $user_birth_m;
@@ -23,10 +25,9 @@ class user_data_manipulation extends parent_class{
     	$this->user_id = strval($id);
 
 
-    	//updating user data
-    	if (in_array($this->user_id , (array)  $this->today_visits_list)){
+        if (in_array($this->user_id, (array) $this->today_visits_list)) {
             $this->is_user_present = true;
-        }else{
+        } else {
             $this->is_user_present = false;
         }
         
@@ -106,7 +107,7 @@ class user_data_manipulation extends parent_class{
 
 
             //substracting from today randome
-            $user_key = array_search($users_id, array_column($this->init_randome , 0));
+            $user_key = array_search($this->user_id, haystack: array_column($this->init_randome , 0));
             array_splice($this->init_randome, $user_key,1);
             file_put_contents($this->path_to_base.'randome.json', json_encode($this->init_randome));
 

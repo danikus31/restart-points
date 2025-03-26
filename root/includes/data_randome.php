@@ -17,7 +17,10 @@ class randome extends parent_class{
 
 
 		//create array with only active peoples
-		for ($v = 0, $i = 0;$this->init_randome[$v]; $j += $i, $v++){
+		$j = 0; // Initialize $j
+
+		for ($v = 0, $i = 0; isset($this->init_randome[$v]); $j += $i, $v++) {
+
 		    if ($this->init_randome[$v][1] == 0) {
 		        $this->today_randome_list[$i] = $this->init_randome[$v][0];
 		        $i++;
@@ -60,8 +63,7 @@ class randome extends parent_class{
 		$this->init_randome= array();
 
 
-
-		for($i=0;$this->today_visits_list[$i];$i++){
+		for ($i = 0; isset($this->today_visits_list[$i]); $i++) {
 		    $this->init_randome[$i][0] = $this->today_visits_list[$i];
 		    $this->init_randome[$i][1] = 0;
 		}

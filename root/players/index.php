@@ -21,7 +21,7 @@ file_put_contents('../database/users.json', json_encode($data));
   
 $v = 0;
 $i = 0;
-while($randome[$v]){
+while(isset($randome[$v])){
     if ($randome[$v][1] == 0) {
         $today_randome[$i] = $randome[$v][0];
         $i++;
