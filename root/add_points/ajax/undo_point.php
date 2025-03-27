@@ -3,7 +3,7 @@
 require '../../includes/connection.php';
 
 
-$user = new user_data_manipulation($_POST['id']);
+$user = new R_user($_POST['id']);
 
 $user->today_substract_point();
 

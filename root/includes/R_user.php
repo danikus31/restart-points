@@ -1,7 +1,7 @@
 <?php
 
 
-class user_data_manipulation extends parent_class{
+class R_user extends parent_class{
 
     public $user_id;
     public $user_name;
@@ -10,40 +10,59 @@ class user_data_manipulation extends parent_class{
     public $user_points;
     public $user_last_visit;
     
+    public $is_banned;
+    public $is_user_present;
+    
     //birthday info
     public $is_set_birthday;
     public $user_age;
 
-    public $is_user_present;
     public $user_date; 
     public $user_birth_d;
     public $user_birth_m;
     public $user_birth_y;
 
-    public function __construct($id){
+    public function __construct(... $args){
         parent::__construct();
-    	$this->user_id = strval($id);
-
-
-        if (in_array($this->user_id, (array) $this->today_visits_list)) {
-            $this->is_user_present = true;
-        } else {
-            $this->is_user_present = false;
-        }
         
-        $this->user_name = $this->init_users_data[$this->user_id]['name'];
-        $this->user_surname = $this->init_users_data[$this->user_id]['surname'];
-        $this->user_photo = $this->path_to_photos.$this->user_id.".jpg";
-        $this->user_points = $this->init_users_data[$this->user_id]['points'];
-        $this->user_last_visit = $this->init_users_data[$this->user_id]['date'];
+        if(count($args)===1){
+            $this->get_user_by_position($args[0]);
+        }
+    }
 
-        $this->is_set_birthday = isset($this->init_users_data[$this->user_id]['birth']);
+    public function get_user_by_position($request_position){
+        $this->user_id = $this->data_users[$request_position]['id'];
+
+
+        $this->is_user_present = in_array($this->user_id, $this->today_visits_list);
+
+        
+        $this->user_name = $this->data_users[$request_position]['name'];
+        $this->user_surname = $this->data_users[$request_position]['surname'];
+        $this->user_photo = $this->url_to_photo.$this->user_id.".jpg";
+        $this->user_points = $this->data_users[$request_position]['points'];
+        
+
+        //find last visit
+        $this->user_last_visit = 0;
+        $weekIndex = count($this->data_visits) - 1;
+        while ($weekIndex >= 0) {
+            if (in_array($this->user_id, $this->data_visits[$weekIndex]['list'])) {
+                break;
+            }
+            $weekIndex--;
+            $this->user_last_visit++;
+        }
+        $this->is_set_birthday = isset($this->init_users_data[$request_position]['banned']);
+
+
+        $this->is_set_birthday = isset($this->init_users_data[$request_position]['birth']);
         
         if($this->is_set_birthday){
-            $this->user_birth_d = date("d",strtotime($this->init_users_data[$this->user_id]['birth']));
-            $this->user_birth_m = date("m",strtotime($this->init_users_data[$this->user_id]['birth']));
-            $this->user_birth_y = date("Y",strtotime($this->init_users_data[$this->user_id]['birth']));
-            $this->user_date = $this->init_users_data[$this->user_id]['birth'];
+            $this->user_birth_d = date("d",strtotime($this->init_users_data[$request_position]['birth']));
+            $this->user_birth_m = date("m",strtotime($this->init_users_data[$request_position]['birth']));
+            $this->user_birth_y = date("Y",strtotime($this->init_users_data[$request_position]['birth']));
+            $this->user_date = $this->init_users_data[$request_position]['birth'];
             
             
             $this->user_age = date('Y') - date("Y",strtotime($this->user_date));
@@ -73,19 +92,18 @@ class user_data_manipulation extends parent_class{
             $this->today_visits_count++;
             
             //adding point to data
-            $this->init_users_data[$this->user_id]['points']++;
-            $this->init_users_data[$this->user_id]['date'] = date('d-m-Y');
-            file_put_contents($this->path_to_base.'users.json', json_encode($this->init_users_data));
+            $this->data_users[$this->user_id]['points']++;
 
             //adding to visit list
-            $this->init_users_visits[count($this->init_users_visits)-1] ['list'] [count($this->init_users_visits[count($this->init_users_visits)-1]['list'])] = $this->user_id;
-            file_put_contents($this->path_to_base.'visit.json', json_encode($this->init_users_visits));
-
+            $this->data_visits[count($this->data_visits)-1]['list'] [count($this->data_visits[count($this->data_visits)-1]['list'])] = $this->user_id;
+           
             //adding to today randome
-            $this->init_randome[count($this->init_randome)][0]=$this->user_id;
-            $this->init_randome[count($this->init_randome)-1][1]=0;
-            file_put_contents($this->path_to_base.'randome.json', json_encode($this->init_randome));
-            
+            $this->data_randome[count($this->data_randome)][0]=$this->user_id;
+            $this->data_randome[count($this->data_randome)-1][1]=0;
+
+            //var_dump($this->data_randome);
+           
+            $this->data_save_all();
         }
     }
 
@@ -97,7 +115,6 @@ class user_data_manipulation extends parent_class{
             
             //substracting point from data
             $this->init_users_data[$this->user_id]['points']--;
-            $this->init_users_data[$this->user_id]['visit'] = date("d-m-y",strtotime("-1 week"));
             file_put_contents($this->path_to_base.'users.json', json_encode($this->init_users_data));
             
             //substracting from today visits
@@ -112,5 +129,10 @@ class user_data_manipulation extends parent_class{
             file_put_contents($this->path_to_base.'randome.json', json_encode($this->init_randome));
 
         }
+    }
+
+    public function update_birthday($date){
+        $this->data_users[$this->user_id]['birth']=$date;
+        $this->data_save_all();
     }
 }

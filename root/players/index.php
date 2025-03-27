@@ -45,7 +45,7 @@ while(isset($randome[$v])){
     <?php
         
         $args = array(
-            'last_visits_of_users' => 1,
+            'max_last_visits_of_users' => 0,
             'sort'=>true,
         );
         
