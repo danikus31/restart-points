@@ -118,17 +118,31 @@ function is_birthday($user_date){
         </div>
         <div class="birthday_users_wrapper">
         <?php
-        /*
-        for ($x = 0; $data[$x];$x++) {
-            if($data[$x]['birth']){
-                if( was_birthday($data[$x]['birth']) ){
-                    echo $data[$x]['id']. " ";
-                    echo $data[$x]['name']." ".$data[$x]['surname'];
-                    echo "</br>";
+        $args = array("have_birthday"=>1);
+        $birthday_users = new data_displaying($args);
+            
+        while ($birthday_users->is_data) {
+            $birthday_users->load_user();
+            if($birthday_users->user_last_visit< 12){
+                // Check if the birth month is the previous month (adjust to account for current month)
+                if ((int)$birthday_users->user_birth_m + 1 == date("m")) {
+                    $day = (int)$birthday_users->user_birth_d - 29;
+                } 
+                // Check if the birth month is the current month
+                else if ((int)$birthday_users->user_birth_m == date("m")) {
+                    $day = (int)$birthday_users->user_birth_d;
+                }else $day = 10000;
+            
+                // Check if the day difference is between 0 and 7 days
+                if (((int)date("d") - $day >= 0) && ((int)date("d")- $day < 7)) {
+                    echo $birthday_users->user_id . ' ';
+                    echo $birthday_users->user_name . ' ';
+                    echo $birthday_users->user_surname . '<br>';
                 }
             }
         }
-        */
+
+
         ?>
         </div>
 
@@ -139,18 +153,34 @@ function is_birthday($user_date){
             <h3>Будет день рождения</h3>
         </div>
         <div class="birthday_users_wrapper">
+            
+        
         <?php
-        /*
-        for ($x = 0; $data[$x]; $x++) {
-            if($data[$x]['birth']){
-                if( is_birthday($data[$x]['birth']) ){
-                    echo $data[$x]['id']. " ";
-                    echo $data[$x]['name']." ".$data[$x]['surname'];
-                    echo "</br>";
+        $args = array("have_birthday"=>1);
+        $birthday_users = new data_displaying($args);
+            
+        while ($birthday_users->is_data) {
+            $birthday_users->load_user();
+            
+            if($birthday_users->user_last_visit< 12){
+        
+                // Check if the birth month is the previous month (adjust to account for current month)
+                if ((int)$birthday_users->user_birth_m - 1 == date("m")) {
+                    $day = (int)$birthday_users->user_birth_d + 29;
+                } 
+                // Check if the birth month is the current month
+                else if ((int)$birthday_users->user_birth_m == date("m")) {
+                    $day = (int)$birthday_users->user_birth_d;
+                }else $day = 10000;
+            
+                // Check if the day difference is between 0 and 7 days
+                if (((int)date("d") - $day < 0) && ((int)date("d")- $day > -6)) {
+                    echo $birthday_users->user_id . ' ';
+                    echo $birthday_users->user_name . ' ';
+                    echo $birthday_users->user_surname . '<br>';
                 }
             }
         }
-        */
         ?>
         </div>
     </section>
@@ -158,7 +188,7 @@ function is_birthday($user_date){
         <?php
 
         while ($users->is_data){
-            $users->load_user()
+            $users->load_user();
         ?>
             
             <div class="user_block" id="<?=$users->user_id?>">
@@ -174,6 +204,7 @@ function is_birthday($user_date){
                         <div class="users_pointers_block">
                             <div class="user_points">очки = </div>
                             <div id="personid<?=$users->user_id?>"><?=$users->user_points?></div>
+                            <div><?=$users->user_last_visit?></div>
                         </div>
                     </div>
                         
@@ -183,10 +214,10 @@ function is_birthday($user_date){
                 
                 <div class="user_info none">
                     <form class="birth_form">
-                        <input id="personday',$v+1,'" class="input_date input_day" value="<?=$users->user_birth_d?>" placeholder="01">
-                        <input id="personmonth',$v+1,'" class="input_date input_month" value="<?=$users->user_birth_m?>" placeholder="12">
-                        <input id="personyear',$v+1,'" class="input_date input_year" value="<?=$users->user_birth_y?>" placeholder="2000">
-                        <div class="date_button" onclick="add_birth_day(',$v+1,')">submit</div>
+                        <input id="personday<?=$users->user_id?>" class="input_date input_day" value="<?=$users->user_birth_d?>" placeholder="01">
+                        <input id="personmonth<?=$users->user_id?>" class="input_date input_month" value="<?=$users->user_birth_m?>" placeholder="12">
+                        <input id="personyear<?=$users->user_id?>" class="input_date input_year" value="<?=$users->user_birth_y?>" placeholder="2000">
+                        <div class="date_button" onclick="add_birth_day(<?=$users->user_id?>)">submit</div>
                     </form>
                             
                     <div onclick="undo_point(<?=$users->user_id?>)" id="personminus<?=$users->user_id?>" class="points_block minus_point <?php if(!$users->is_user_present){echo 'used';}?>"></div>

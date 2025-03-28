@@ -3,7 +3,7 @@
 require '../../includes/connection.php';
 
 
-$user = new user_data_manipulation($_POST['id']);
+$user = new R_user((int)$_POST['id']);
 
 $user->today_add_point();
 

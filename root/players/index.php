@@ -45,7 +45,7 @@ while(isset($randome[$v])){
     <?php
         
         $args = array(
-            'last_visits_of_users' => 1,
+            'max_last_visits_of_users' => 3,
             'sort'=>true,
         );
         
@@ -93,11 +93,16 @@ while(isset($randome[$v])){
                                 if($users->is_data){
                                     $users->load_user();
                                     echo '<div class="user_block" id='.$users->user_id.'>';
-                                    if ($users->is_user_present){
+                                    if (($users->is_user_present)||($users->is_admin)){
                                         echo '<div class="present_user"></div>';
                                     }
                                     echo '<img class="user_foto" src="'.$users->user_photo.'" alt="">';
-                		            echo '<div class="user_points">'. $users->user_points .'</div>';
+
+                                    if ($users->is_admin){
+                                        echo '<div class="user_points">∞</div>';
+                                    }else {
+                                        echo '<div class="user_points">'. $users->user_points .'</div>';  
+                                    }
                 		            echo '<div class="info_block">';
                     		        echo '<div class="user_name">'.$users->user_name .'</div>';
                 		            echo '</div></div>';

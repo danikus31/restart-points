@@ -1,17 +1,16 @@
 <?php
 
-require '../includes/connection.php';
+require '../../includes/connection.php';
 
 
 $id = $_POST['id'];
 $birth = $_POST['birth'];
 
 
+$user = new R_user($id);
 
 
-//$data[$id-1]['birth'] = $birth;
+$user->update_birthday($birth);
 
-
-file_put_contents('../database/users.json', json_encode($data));
-
-echo $birth;
+echo 'recived'.$birth.'id='.$id."\n";
+echo 'base= '.$user->user_date. 'id='. $user->user_id;
