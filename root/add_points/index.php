@@ -204,7 +204,6 @@ function is_birthday($user_date){
                         <div class="users_pointers_block">
                             <div class="user_points">очки = </div>
                             <div id="personid<?=$users->user_id?>"><?=$users->user_points?></div>
-                            <div><?=$users->user_last_visit?></div>
                         </div>
                     </div>
                         
