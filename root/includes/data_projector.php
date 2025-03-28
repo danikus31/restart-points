@@ -5,10 +5,6 @@ class projector{
     
     protected $path_to_base;
 
-
-
-
-
 	public $count = 20;
 
 	public function __construct(){

@@ -20,7 +20,6 @@ class database_connection {
 
 
     //test    
-    protected $init_users_data;
     protected $init_users_visits;
     protected $init_randome;
 
@@ -46,7 +45,6 @@ class database_connection {
 
         
         if(true){//if is test
-            $this->init_users_data = $this->data_users;
             $this->init_users_visits = $this->data_visits;
             $this->init_randome = $this->data_randome;
             $this->path_to_photos = $this->url_to_photo;
@@ -57,7 +55,7 @@ class database_connection {
         
         //to delete last visit
         $numbOfUsers = count($this->data_users);
-        if(isset($this->data_users[0]['date'])){
+        if(isset($this->data_users[1]['date'])){
 
             for ($i = 0; $i < $numbOfUsers; $i++) {
                 unset($this->data_users[$i]['date']);

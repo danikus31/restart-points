@@ -41,9 +41,9 @@ class randome extends parent_class{
 
 
 		//get user info
-		$this->user_name = $this->init_users_data[$this->user_id]['name'];
-		$this->user_surname = $this->init_users_data[$this->user_id]['surname'];
-        $this->user_points = $this->init_users_data[$this->user_id]['points'];
+		$this->user_name = $this->data_users[$this->user_id]['name'];
+		$this->user_surname = $this->data_users[$this->user_id]['surname'];
+        $this->user_points = $this->data_users[$this->user_id]['points'];
         $this->user_photo = $this->path_to_photos . $this->user_id.".jpg";
 
 
@@ -79,7 +79,7 @@ class randome extends parent_class{
 
 		foreach($this->today_visits_list as $key => $value){
 			$this->randome_teams[$key]['img'] = $this->path_to_photos.$value.'.jpg';
-			$this->randome_teams[$key]['user_name'] = $this->init_users_data[$value]['name'];
+			$this->randome_teams[$key]['user_name'] = $this->data_users[$value]['name'];
 		}
 
 

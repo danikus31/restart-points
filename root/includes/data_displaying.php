@@ -25,17 +25,30 @@ class data_displaying extends R_user{
                 }
             }
         }
+        
+        if (isset($args["have_birthday"])) {
+            for ($i = count($this->data_users) - 1; $i >= 1; $i--) { 
+                $this->get_user_by_position($i);
+        
+                if ($this->user_last_visit > $args["have_birthday"]) {
+                    array_splice($this->data_users, $i, 1);
+                }
+            }
+        }
 
 
         // Sort the array by 'points' in descending order
-        usort($this->data_users, function($x, $y) {
-
-            // Check if 'points' key exists in both arrays because exisit easter egg
-            if (!isset($x['points']) || !isset($y['points'])) {
-                return 0; // or you can handle it differently if the 'points' key is missing
+        if(isset($args["sort"])){
+            if($args["sort"]){
+                usort($this->data_users, function($x, $y) {
+                    // Check if 'points' key exists in both arrays because exisit easter egg
+                    if (!isset($x['points']) || !isset($y['points'])) {
+                        return 0; // or you can handle it differently if the 'points' key is missing
+                    }
+                    return $y['points'] <=> $x['points'];
+                });
             }
-            return $y['points'] <=> $x['points'];
-        });
+        }
         
         $this->is_data = isset($this->data_users[$this->array_position+1]);
         

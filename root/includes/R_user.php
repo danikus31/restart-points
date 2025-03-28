@@ -11,6 +11,7 @@ class R_user extends parent_class{
     public $user_last_visit;
     
     public $is_banned;
+    public $is_admin;
     public $is_user_present;
     
     //birthday info
@@ -53,16 +54,22 @@ class R_user extends parent_class{
             $weekIndex--;
             $this->user_last_visit++;
         }
-        $this->is_set_birthday = isset($this->init_users_data[$request_position]['banned']);
+        $this->is_banned = isset($this->data_users[$request_position]['banned']);
+
+        if(isset($this->data_users[$request_position]['admin'])){
+            $this->is_admin = $this->data_users[$request_position]['admin'];
+        }else{
+            $this->is_admin = false;
+        }
 
 
-        $this->is_set_birthday = isset($this->init_users_data[$request_position]['birth']);
+        $this->is_set_birthday = isset($this->data_users[$request_position]['birth']);
         
         if($this->is_set_birthday){
-            $this->user_birth_d = date("d",strtotime($this->init_users_data[$request_position]['birth']));
-            $this->user_birth_m = date("m",strtotime($this->init_users_data[$request_position]['birth']));
-            $this->user_birth_y = date("Y",strtotime($this->init_users_data[$request_position]['birth']));
-            $this->user_date = $this->init_users_data[$request_position]['birth'];
+            $this->user_birth_d = date("d",strtotime($this->data_users[$request_position]['birth']));
+            $this->user_birth_m = date("m",strtotime($this->data_users[$request_position]['birth']));
+            $this->user_birth_y = date("Y",strtotime($this->data_users[$request_position]['birth']));
+            $this->user_date = $this->data_users[$request_position]['birth'];
             
             
             $this->user_age = date('Y') - date("Y",strtotime($this->user_date));
@@ -114,8 +121,8 @@ class R_user extends parent_class{
             $this->today_visits_count--;
             
             //substracting point from data
-            $this->init_users_data[$this->user_id]['points']--;
-            file_put_contents($this->path_to_base.'users.json', json_encode($this->init_users_data));
+            $this->data_users[$this->user_id]['points']--;
+            file_put_contents($this->path_to_base.'users.json', json_encode($this->data_users));
             
             //substracting from today visits
             $visits_key = array_search($this->user_id, $this->init_users_visits[count($this->init_users_visits)-1] ['list']);
