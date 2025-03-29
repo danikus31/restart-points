@@ -47,6 +47,7 @@ while(isset($randome[$v])){
         $args = array(
             'max_last_visits_of_users' => 1,
             'sort'=>true,
+            'admin'=>true
         );
         
         $users = new data_displaying($args);

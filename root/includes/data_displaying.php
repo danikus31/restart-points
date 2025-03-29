@@ -19,8 +19,12 @@ class data_displaying extends R_user{
         if (isset($args["max_last_visits_of_users"])) {
             for ($i = count($this->data_users) - 1; $i >= 1; $i--) { 
                 $this->get_user_by_position($i);
-        
-                if ($this->user_last_visit > $args["max_last_visits_of_users"]) {
+                if(isset($args["max_last_visits_of_users"])) {
+                    $skip_by_admin = $this->is_admin;
+                }else{
+                    $skip_by_admin = false;
+                }
+                if ($this->user_last_visit > $args["max_last_visits_of_users"]|| $skip_by_admin) {
                     array_splice($this->data_users, $i, 1);
                 }
             }
