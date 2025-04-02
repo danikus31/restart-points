@@ -59,7 +59,7 @@ class R_user extends parent_class
     public function user_comming_birthday()
     {
         // Check if the birth month is the previous month (adjust to account for current month)
-        if ($this->user_birth_m - 1 == date("m")) {
+        if ((int)$this->user_birth_m - 1 == date("m")) {
             $day = $this->user_birth_d + 29;
         }
         // Check if the birth month is the current month
