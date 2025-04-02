@@ -147,8 +147,7 @@ while($randome[$v]){
                         </div>
                     
                         <div class="users_pointers_block">
-                            <div class="user_points">очки = </div>
-                            <div id="personid<?=$users->user_id?>"><?=$users->user_points?></div>
+                            <div class="user_points" id="personid<?=$users->user_id?>">очки = <?=$users->user_points?></div>
                         </div>
                     </div>
                         

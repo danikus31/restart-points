@@ -4,11 +4,13 @@
 
 require '../../includes/connection.php';
 
-$projector = new projector();
+$projector = new database_connection();
 
-$projector->change_stat($_POST['stat']);
+$projector->projector =$_POST['stat'];
+$projector->data_save_projector();
 
 $answer['count'] = 'X';
+$answer['status'] = $projector->projector;
 
 
 echo json_encode($answer);

@@ -52,9 +52,9 @@ class parent_class extends database_connection{
             $this->data_visits[count($this->data_visits)]['date'] = date('d-m-Y');
             $this->data_visits[count($this->data_visits)-1]['list'] = array();
 
-            unset($this->init_randome);
+            unset($this->data_randome);
 
-            $this->init_randome = array();
+            $this->data_randome = array();
             
             $this->data_save_all();
 

@@ -21,7 +21,7 @@ function add_point(x){
             
             console.log(lol);
                 
-            document.getElementById("personid"+x).innerHTML = lol['points'];
+            document.getElementById("personid"+x).innerHTML = "очки = " + lol['points'];
             
             document.getElementById("personadd"+x).classList.toggle("used");
             
@@ -60,7 +60,7 @@ function undo_point(x){
             console.log(lol);
 
                 
-            document.getElementById("personid"+x).innerHTML = lol['points'];
+            document.getElementById("personid"+x).innerHTML = "очки = " + lol['points'];
             
             document.getElementById("personadd"+x).classList.toggle("used");
             

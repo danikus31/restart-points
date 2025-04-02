@@ -7,8 +7,7 @@ $users = new data_displaying('nothing');
 $answer['count'] = $users->today_visits_count ;
 
 
-$projector = new projector();
-$answer['stat'] = $projector->init_projector;
+$answer['stat'] = $users->projector;
 
 
 

@@ -3,5 +3,6 @@
 
 require '../../includes/connection.php';
 
-$projector = new projector();
-$projector->change_stat(0);
+$projector = new database_connection();
+$projector->projector=0;
+$projector->data_save_projector();

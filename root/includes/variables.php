@@ -12,20 +12,11 @@ class database_connection {
     protected $data_users;
     protected $data_visits;
     protected $data_randome;
-    protected $projector;
+    public $projector;
 
 
 
 
-
-
-    //test    
-    protected $init_users_visits;
-    protected $init_randome;
-
-    protected $path_to_photos;
-    protected $path_to_base;
-    //end test ends
 
     public function __construct() {
         $this->site_url = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
@@ -40,16 +31,9 @@ class database_connection {
         $this->data_users = json_decode(file_get_contents($this->url_to_base . "users.json"), true);
         $this->data_visits = json_decode(file_get_contents($this->url_to_base . "visit.json"), true);
         $this->data_randome = json_decode(file_get_contents($this->url_to_base . "randome.json"), true);
-        $this->projector = json_decode(file_get_contents($this->url_to_base . "projecto.json"), true);
+        $this->projector = file_get_contents($this->url_to_base . "projector.json");
 
 
-        
-        if(true){//if is test
-            $this->init_users_visits = $this->data_visits;
-            $this->init_randome = $this->data_randome;
-            $this->path_to_photos = $this->url_to_photo;
-            $this->path_to_base = $this->url_to_base;
-        }
 
 
         
@@ -75,10 +59,14 @@ class database_connection {
     public function data_save_randome(){
         file_put_contents($this->url_to_base.'randome.json', json_encode($this->data_randome, JSON_UNESCAPED_UNICODE ));
     }
+    public function data_save_projector(){
+        file_put_contents($this->url_to_base.'projector.json', $this->projector);
+    }
     public function data_save_all(){
         $this->data_save_users();
         $this->data_save_visits();
         $this->data_save_randome();
+        $this->data_save_projector();
     }
 
 

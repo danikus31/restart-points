@@ -61,7 +61,7 @@ function myFunction(){
             
             setTimeout(function() {
                 document.getElementById("loading").classList.toggle("loading_hiden");
-            }, 1700);
+            }, 0);
             
             document.getElementById("randome_counter").innerHTML = lol['now_in_randome'];
         }

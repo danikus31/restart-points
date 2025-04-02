@@ -13,16 +13,16 @@ class randome extends parent_class{
 	public function __construct(){
         parent::__construct();
 
-        $this->today_visits_list = $this->init_users_visits[count($this->init_users_visits)-1]['list'];
+        $this->today_visits_list = $this->data_visits[count($this->data_visits)-1]['list'];
 
 
 		//create array with only active peoples
 		$j = 0; // Initialize $j
 
-		for ($v = 0, $i = 0; isset($this->init_randome[$v]); $j += $i, $v++) {
+		for ($v = 0, $i = 0; isset($this->data_randome[$v]); $j += $i, $v++) {
 
-		    if ($this->init_randome[$v][1] == 0) {
-		        $this->today_randome_list[$i] = $this->init_randome[$v][0];
+		    if ($this->data_randome[$v][1] == 0) {
+		        $this->today_randome_list[$i] = $this->data_randome[$v][0];
 		        $i++;
 		    }
 		}
@@ -44,32 +44,32 @@ class randome extends parent_class{
 		$this->user_name = $this->data_users[$this->user_id]['name'];
 		$this->user_surname = $this->data_users[$this->user_id]['surname'];
         $this->user_points = $this->data_users[$this->user_id]['points'];
-        $this->user_photo = $this->path_to_photos . $this->user_id.".jpg";
+        $this->user_photo = $this->url_to_photo . $this->user_id.".jpg";
 
 
 		//changing to 1 selectet person
-		foreach ($this->init_randome as $key2 => $value) {
+		foreach ($this->data_randome as $key2 => $value) {
 		    if ($value[0] == $this->user_id) {
-		        $this->init_randome[$key2][1] = 1;
+		        $this->data_randome[$key2][1] = 1;
 		    }
 		}
 		$this->today_randome_count--;
         // encode array to json and save to file
-        file_put_contents($this->path_to_base.'randome.json', json_encode($this->init_randome));
+        file_put_contents($this->url_to_base.'randome.json', json_encode($this->data_randome));
 
 	}
 
 	public function reset_today_randome(){
-		$this->init_randome= array();
+		$this->data_randome= array();
 
 
 		for ($i = 0; isset($this->today_visits_list[$i]); $i++) {
-		    $this->init_randome[$i][0] = $this->today_visits_list[$i];
-		    $this->init_randome[$i][1] = 0;
+		    $this->data_randome[$i][0] = $this->today_visits_list[$i];
+		    $this->data_randome[$i][1] = 0;
 		}
-		file_put_contents($this->path_to_base.'randome.json', json_encode($this->init_randome));
+		file_put_contents($this->url_to_base.'randome.json', json_encode($this->data_randome));
 
-		$this->today_randome_count = count($this->init_randome);
+		$this->today_randome_count = count($this->data_randome);
 	}
 
 	public function randome_team_shuffle($num){
@@ -78,7 +78,7 @@ class randome extends parent_class{
 
 
 		foreach($this->today_visits_list as $key => $value){
-			$this->randome_teams[$key]['img'] = $this->path_to_photos.$value.'.jpg';
+			$this->randome_teams[$key]['img'] = $this->url_to_photo.$value.'.jpg';
 			$this->randome_teams[$key]['user_name'] = $this->data_users[$value]['name'];
 		}
 
