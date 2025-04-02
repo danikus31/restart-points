@@ -23,41 +23,6 @@ while($randome[$v]){
 }
 */
 
-function was_birthday($user_date){
-    if(date("m",strtotime($user_date)) - date('m') == 0){
-        $test_date = date("d",strtotime($user_date));
-        if($test_date - date(d) <= 0 and $test_date - date(d)>-8){
-            return 1;
-        }
-    }else if(date("m",strtotime($user_date)) - date('m') == -1){
-        $test_date = date("d",strtotime($user_date)) + cal_days_in_month(CAL_GREGORIAN, date('m')-1, date('Y'));
-        if($test_date - date(d) <= 0 and $test_date - date(d)>-8){
-            return 1;
-        }  
-    }else{
-        return 0;
-    }
-}
-
-
-
-
-function is_birthday($user_date){
-    if(date("m",strtotime($user_date)) - date('m') == 0){
-        $test_date = date("d",strtotime($user_date));
-        if($test_date - date(d) <8 and $test_date - date(d)>0){
-            return 1;
-        }
-    }else if(date("m",strtotime($user_date)) - date('m') == 1){
-        $test_date = date("d",strtotime($user_date)) + cal_days_in_month(CAL_GREGORIAN, date('m')-1, date('Y'));
-        if($test_date - date(d) <8 and $test_date - date(d)>0){
-            return 1;
-        }  
-    }else{
-        return 0;
-    }
-}
-
     
 ?>
 
@@ -118,27 +83,18 @@ function is_birthday($user_date){
         </div>
         <div class="birthday_users_wrapper">
         <?php
-        $args = array("have_birthday"=>1);
+        $args = array(
+            "have_birthday"=>true,
+            "max_last_visits_of_users" => 14
+        );
         $birthday_users = new data_displaying($args);
             
         while ($birthday_users->is_data) {
             $birthday_users->load_user();
-            if($birthday_users->user_last_visit< 12){
-                // Check if the birth month is the previous month (adjust to account for current month)
-                if ((int)$birthday_users->user_birth_m + 1 == date("m")) {
-                    $day = (int)$birthday_users->user_birth_d - 29;
-                } 
-                // Check if the birth month is the current month
-                else if ((int)$birthday_users->user_birth_m == date("m")) {
-                    $day = (int)$birthday_users->user_birth_d;
-                }else $day = 10000;
-            
-                // Check if the day difference is between 0 and 7 days
-                if (((int)date("d") - $day >= 0) && ((int)date("d")- $day < 7)) {
-                    echo $birthday_users->user_id . ' ';
-                    echo $birthday_users->user_name . ' ';
-                    echo $birthday_users->user_surname . '<br>';
-                }
+            if($birthday_users->user_has_birthdaysd()){
+                echo $birthday_users->user_id . ' ';
+                echo $birthday_users->user_name . ' ';
+                echo $birthday_users->user_surname . '<br>';
             }
         }
 
@@ -156,29 +112,18 @@ function is_birthday($user_date){
             
         
         <?php
-        $args = array("have_birthday"=>1);
+        $args = array(
+            "have_birthday"=>1,
+            "max_last_visits_of_users" => 14
+        );
         $birthday_users = new data_displaying($args);
             
         while ($birthday_users->is_data) {
             $birthday_users->load_user();
-            
-            if($birthday_users->user_last_visit< 12){
-        
-                // Check if the birth month is the previous month (adjust to account for current month)
-                if ((int)$birthday_users->user_birth_m - 1 == date("m")) {
-                    $day = (int)$birthday_users->user_birth_d + 29;
-                } 
-                // Check if the birth month is the current month
-                else if ((int)$birthday_users->user_birth_m == date("m")) {
-                    $day = (int)$birthday_users->user_birth_d;
-                }else $day = 10000;
-            
-                // Check if the day difference is between 0 and 7 days
-                if (((int)date("d") - $day < 0) && ((int)date("d")- $day > -6)) {
-                    echo $birthday_users->user_id . ' ';
-                    echo $birthday_users->user_name . ' ';
-                    echo $birthday_users->user_surname . '<br>';
-                }
+            if($birthday_users->user_comming_birthday()){
+                echo $birthday_users->user_id . ' ';
+                echo $birthday_users->user_name . ' ';
+                echo $birthday_users->user_surname . '<br>';
             }
         }
         ?>
