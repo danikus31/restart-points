@@ -164,7 +164,7 @@ class R_user extends parent_class
 
     public function today_substract_point()
     {
-        if (in_array($this->user_id, $this->data_visits)) {
+        if (in_array($this->user_id, $this->today_visits_list)) {
 
             $this->user_points--;
             $this->today_visits_count--;
@@ -177,7 +177,7 @@ class R_user extends parent_class
             array_splice($this->data_visits[count($this->data_visits) - 1]['list'], $visits_key, 1);
 
             //substracting from today randome
-            $user_key = array_search($this->user_id, haystack: array_column($this->data_randome, 0));
+            $user_key = array_search($this->user_id, array_column($this->data_randome, 0));
             array_splice($this->data_randome, $user_key, 1);
 
             $this->data_save_all();
