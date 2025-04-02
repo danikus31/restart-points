@@ -115,26 +115,24 @@ class R_user extends parent_class{
     }
 
     public function today_substract_point(){
-        if(in_array($this->user_id,  $this->today_visits_list)){
+        if(in_array($this->user_id,  $this->data_visits)){
 
             $this->user_points--;
             $this->today_visits_count--;
             
             //substracting point from data
             $this->data_users[$this->user_id]['points']--;
-            file_put_contents($this->path_to_base.'users.json', json_encode($this->data_users));
             
             //substracting from today visits
-            $visits_key = array_search($this->user_id, $this->init_users_visits[count($this->init_users_visits)-1] ['list']);
-            array_splice($this->init_users_visits[count($this->init_users_visits)-1] ['list'], $visits_key,1);
-            file_put_contents($this->path_to_base.'visit.json', json_encode($this->init_users_visits));
-
+            $visits_key = array_search($this->user_id, $this->data_visits[count($this->data_visits)-1] ['list']);
+            array_splice($this->data_visits[count($this->data_visits)-1] ['list'], $visits_key,1);
+            
 
             //substracting from today randome
-            $user_key = array_search($this->user_id, haystack: array_column($this->init_randome , 0));
-            array_splice($this->init_randome, $user_key,1);
-            file_put_contents($this->path_to_base.'randome.json', json_encode($this->init_randome));
-
+            $user_key = array_search($this->user_id, haystack: array_column($this->data_randome , 0));
+            array_splice($this->data_randome, $user_key,1);
+            
+            $this->data_save_all();
         }
     }
 

@@ -67,13 +67,13 @@ class database_connection {
     }
 
     public function data_save_users(){
-        file_put_contents($this->url_to_base.'users.json', json_encode($this->data_users));
+        file_put_contents($this->url_to_base.'users.json', json_encode($this->data_users, JSON_UNESCAPED_UNICODE ));
     }
     public function data_save_visits(){
-        file_put_contents($this->url_to_base.'visit.json', json_encode($this->data_visits));
+        file_put_contents($this->url_to_base.'visit.json', json_encode($this->data_visits, JSON_UNESCAPED_UNICODE ));
     }
     public function data_save_randome(){
-        file_put_contents($this->url_to_base.'randome.json', json_encode($this->data_randome));
+        file_put_contents($this->url_to_base.'randome.json', json_encode($this->data_randome, JSON_UNESCAPED_UNICODE ));
     }
     public function data_save_all(){
         $this->data_save_users();
