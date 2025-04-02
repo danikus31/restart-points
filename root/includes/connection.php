@@ -14,5 +14,3 @@ require'R_user.php';
 require'data_displaying.php';
 
 require'data_randome.php';
-
-require'data_projector.php';
