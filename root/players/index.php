@@ -106,6 +106,9 @@ while(isset($randome[$v])){
                                     }
                 		            echo '<div class="info_block">';
                     		        echo '<div class="user_name">'.$users->user_name .'</div>';
+                                    if($users->user_has_birthdaysd()){
+                                        echo '<img class="party_head" src="'.$url_to_site . 'players/party-hat.png" alt="">';
+                                    }
                 		            echo '</div></div>';
                                 }
                             }
