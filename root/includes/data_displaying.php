@@ -70,8 +70,4 @@ class data_displaying extends R_user{
         $this->get_user_by_position(++$this->array_position);
         $this->is_data = isset($this->data_users[$this->array_position+1]);
     }
-
-    public function update_data(){
-
-    }
 }
