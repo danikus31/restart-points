@@ -14,6 +14,12 @@ function add_point(){
     ajaxGet(params);
     
     function ajaxGet(params){
+        
+                
+        document.getElementById("input_name").value = null;
+        document.getElementById("input_surname").value = null;
+        document.getElementById("input_name").focus();
+
         var request = new XMLHttpRequest();
         request.onreadystatechange = function(){
             if (this.readyState == 4 && this.status == 200) {
@@ -21,12 +27,6 @@ function add_point(){
                 
                 console.log(this.responseText);
                 
-                
-                document.getElementById("input_name").value = null;
-                
-                document.getElementById("input_surname").value = null;
-                
-                document.getElementById("input_name").focus();
                 
             }
         };
