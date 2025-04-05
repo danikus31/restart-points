@@ -189,4 +189,25 @@ class R_user extends parent_class
         $this->data_users[$this->user_id]['birth'] = $date;
         $this->data_save_all();
     }
+
+    public function add_new_user($name, $surname)
+    {
+        $free_id=count($this->data_users);
+
+        $this->data_users[$free_id]['name'] = $name;
+        $this->data_users[$free_id]['surname'] = $surname;
+        $this->data_users[$free_id]['id'] = $free_id;
+        $this->data_users[$free_id]['points'] = 1;
+
+        //adding to today visits
+        $this->data_visits[count($this->data_visits) - 1]['list'][count($this->data_visits[count($this->data_visits) - 1]['list'])] = strval($free_id);
+
+
+        //adding to today randome
+        $this->data_randome[count($this->data_randome)][0] = strval($free_id);
+        $this->data_randome[count($this->data_randome) - 1][1] = 0;
+
+        //var_dump($this->data_randome);
+        $this->data_save_all();
+    }
 }

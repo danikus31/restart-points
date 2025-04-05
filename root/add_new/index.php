@@ -1,9 +1,6 @@
 <?php
 require '../includes/connection.php';
 
-
-file_put_contents('../../database/users.json', json_encode($data));
-
     
 ?>
 
