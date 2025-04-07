@@ -47,7 +47,7 @@ while($randome[$v]){
         <div class="search_wrapper">
             <div onclick="display_controler()" class="remote_control_btn"></div>
             <div class="input_wrapper">
-                <input id="myInput" placeholder="search" onfocus="this.placeholder = ''" onblur="this.placeholder = 'search'" >
+                <input id="myInput" placeholder="search" autofocus  onfocus="this.placeholder = ''" onblur="this.placeholder = 'search'" >
                 <div onclick="clearsearch()" style="display:none;" class="clear_search"></div>
             </div>
         </div>
@@ -136,13 +136,13 @@ while($randome[$v]){
             $users->load_user();
         ?>
             
-            <div class="user_block" id="<?=$users->user_id?>">
+            <div class="user_block <?php if($users->user_last_visit>1)echo "user_old";?>" id="<?=$users->user_id?>">
                 <div class="user_stats">
                     <img class="user_foto" src="<?=$users->user_photo?>" alt="">
                         <div class="info_block" onclick="showinterface(<?=$users->user_id?>)">
                         <div id="user_name" class="user_name">
                             <?=$users->user_id?>.
-                            <?=$users->user_name?> <?=$users->user_surname?>
+                            <?=$users->user_name?> <?=$users->user_surname?> <?=$users->user_last_visit?>
                                 <?php if($users->is_set_birthday){echo' ('.$users->user_age.')';}?>
                         </div>
                     

@@ -105,6 +105,21 @@ img{
     gap:.5em;
 }
 
+.user_old{
+    display:none !important;
+}
+
+
+.user_visible{
+    display:grid !important;
+}
+
+
+
+.user_not_visible{
+    display:none !important;
+}
+
 .user_block{
     border:3px solid rgba(152,83,255, 1);
 	background-color: rgba(255,255,255,.1);

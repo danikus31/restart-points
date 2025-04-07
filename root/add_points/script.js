@@ -84,17 +84,35 @@ function undo_point(x){
 
 
 
-$("#myInput").on("keyup", function() {
-    if(!$("#myInput").val()){
-        $(".clear_search").css('display', 'none');
-    }else{
-        $(".clear_search").css('display', 'block');
+$("#myInput").on("keyup", function () {
+    const $input = $(this);
+    const query = $input.val().toLowerCase();
+    const $clearBtn = $(".clear_search");
+    const $users = $("#users .user_block");
+
+    if (!query) {
+        $clearBtn.css("display", "none");
+
+        // Показать всех пользователей (удалить классы скрытия/отображения)
+        $users.removeClass("user_visible user_not_visible");
+        return;
     }
-    var value = $(this).val().toLowerCase();
-    $("#users .user_block").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+
+    $clearBtn.css("display", "block");
+
+    // Фильтрация пользователей по тексту
+    $users.each(function () {
+        const $user = $(this);
+        const text = $user.text().toLowerCase();
+
+        if (text.includes(query)) {
+            $user.addClass("user_visible").removeClass("user_not_visible");
+        } else {
+            $user.addClass("user_not_visible").removeClass("user_visible");
+        }
     });
 });
+
 
 
   
